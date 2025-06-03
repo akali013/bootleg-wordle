@@ -1,0 +1,62 @@
+.header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  height: 50px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(95, 95, 95);
+}
+
+.header-left-section {
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-middle-section {
+  flex: 3;
+}
+
+.header-right-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+}
+
+.hamburger-menu-icon-container {
+  width: 25px;
+}
+
+.hamburger-menu-icon {
+  width: 100%;
+}
+
+.lightbulb-icon-container,
+.barchart-icon-container,
+.help-icon-container,
+.settings-icon-container {
+  width: 30px;
+  margin: 0 10px;
+}
+
+.lightbulb-icon,
+.barchart-icon,
+.help-icon,
+.settings-icon {
+  width: 100%;
+}
+
+.subscribe-button {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  width: 150px;
+  padding: 10px;
+  border-radius: 30px;
+  margin-left: 10px;
+}

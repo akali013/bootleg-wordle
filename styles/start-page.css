@@ -1,0 +1,67 @@
+body {
+  font-family: Merriweather;
+  background-color: rgb(212, 212, 192);
+  text-align: center;
+}
+
+.logo-container {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 50px;
+  margin: auto;
+  margin-top: 200px;
+  margin-bottom: 50px;
+}
+
+.logo {
+  width: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.title-container {
+  font-size: 32px;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+.subtitle-container {
+  width: 400px;
+  font-size: 36px;
+  margin: auto;
+  margin-bottom: 25px;
+}
+
+.buttons-container {
+  margin-bottom: 40px;
+}
+
+.subscribe-button, .login-button {
+  width: 150px;
+  background-color: transparent;
+  border: 1px solid black;
+  padding: 10px 0;
+  margin: 0 7px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.play-button {
+  width: 150px;
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 11px 0;
+  margin: 0 7px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.data-container {
+  font-family: Arial;
+  font-size: 15px;
+}
+
+.date {
+  font-weight: 700;
+}

@@ -1,0 +1,43 @@
+.display-container {
+  display: grid;
+  grid-template-columns: 63px 63px 63px 63px 63px;
+  column-gap: 3px;
+  justify-content: center;
+  margin: 5px;
+}
+
+.display-box {
+  border: 2px solid rgb(82, 82, 82);
+  height: 56px;
+}
+
+.keyboard {
+  margin-top: 25px;
+}
+
+.keyboard-top-row,
+.keyboard-middle-row,
+.keyboard-bottom-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.key {
+  display: flex;
+  background-color: gray;
+  width: 45px;
+  height: 55px;
+  margin: 0 3px;
+  font-size: 18px;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.enter-key, .del-key {
+  font-size: 12px;
+  padding: 0 10px;
+}
