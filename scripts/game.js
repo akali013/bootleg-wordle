@@ -1,5 +1,6 @@
 import { words } from "../data/wordbank.js";
 
+let answer;
 const topRowKeys = [
   "Q",
   "W",
@@ -40,6 +41,37 @@ let inputLetters = [];
 // Stores how many guesses were entered
 let totalGuesses = 0;
 
+loadGamePage();
+
+function loadGamePage() {
+  createAnswerGrid();
+  loadKeys();
+
+  answer = getCorrectAnswer();
+  console.log(answer);
+}
+
+// Load the 6x5 answer grid
+function createAnswerGrid() {
+  for (let i = 1; i < 7; i++) {
+    let currentRow = document.querySelector(`.js-attempt-${i}`);
+    let html = "";
+
+    for (let j = 1; j < 6; j++) {
+      html += `<div class="display-box js-box-${i}-${j}"></div>`;
+    }
+
+    currentRow.innerHTML = html;
+  }
+}
+
+// Choose a random word from the word bank to be the answer
+function getCorrectAnswer() {
+  // Pick a random number within the number of words in the bank
+  const randomNumber = Math.floor(Math.random() * words.length);
+  return words[randomNumber];
+}
+
 function loadKeys() {
   const keyboardTopRow = document.querySelector(".js-top-row");
   const keyboardMiddleRow = document.querySelector(".js-middle-row");
@@ -68,6 +100,7 @@ function loadKeys() {
   // Load the bottom row keys
   let bottomRowHTML = "";
   bottomRowKeys.forEach((key) => {
+    // The enter key gets the enter-key class
     if (key === "ENTER") {
       bottomRowHTML += `
         <div class="key enter-key js-key">
@@ -75,6 +108,7 @@ function loadKeys() {
         </div>
       `;
     }
+    // The delete key gets the del-key class
     else if (key === "Del") {
       bottomRowHTML += `
         <div class="key del-key js-key">
@@ -100,99 +134,70 @@ function loadKeys() {
     keyElement.addEventListener("click", () => {
       const letter = keyElement.innerText;
 
+      // Remove the last guessed letter if delete was clicked
       if (letter === "Del") {
         inputLetters.pop();
+        renderAnswerRow();
       }
       else if (letter === "ENTER") {
         submitAnswer();
       }
       else {
+        // Ensure inputLetters never goes beyond 5 letters
         if (inputLetters.length < 5) {
           inputLetters.push(letter);
+          renderAnswerRow();
         }
       }
 
-      renderAnswerGrid();
       console.log(`inputLetters: ${inputLetters}`);
     });
   });
 }
 
-// Choose a random word from the word bank to be the answer
-function getCorrectAnswer() {
-  // Pick a random number within the number of words in the bank
-  const randomNumber = Math.floor(Math.random() * words.length);
-  console.log(randomNumber);
-  return words[randomNumber];
-}
-
-// The user wins the game if the guessed letters spell out the answer
-function submitAnswer() {
-  if (inputLetters.length === 5) {
-    totalGuesses++;
-    let guessedWord = "";
-    inputLetters.forEach((letter) => {
-      guessedWord += letter;
-    });
-    inputLetters = [];
-
-    if (guessedWord.toLowerCase() === answer) {
-      alert("You win!");
-    }
-  }
-}
-
-// Update the answer grid every time the user submits an answer
-// in the correct row based on the number of guesses
-function renderAnswerGrid() {
-  switch(totalGuesses) {
-    case 0:
-      updateAnswerRow("first");
-      break;
-    case 1:
-      updateAnswerRow("second");
-      break;
-    case 2:
-      updateAnswerRow("third");
-      break;
-    case 3:
-      updateAnswerRow("fourth");
-      break;
-    case 4:
-      updateAnswerRow("fifth");
-      break;
-    case 5:
-      updateAnswerRow("sixth");
-      break;
-  }
-}
-
 // Updates a specific row of the answer grid
 // depending on the current number of guesses
-function updateAnswerRow(rowNumber) {
-  const row = document.querySelector(`.js-${rowNumber}-attempt`);
+function renderAnswerRow() {
+  const row = document.querySelector(`.js-attempt-${totalGuesses + 1}`);
   let rowHTML = "";
 
-  inputLetters.forEach((letter) => {
+  for (let i = 0; i < inputLetters.length; i++) {
     rowHTML += `
-      <div class="display-box">
-        ${letter}
+      <div class="display-box js-box-${totalGuesses + 1}-${i + 1}">
+        ${inputLetters[i]}
       </div>
     `;
-  });
+  };
 
   // Use empty boxes for the rest of the row
   let i = inputLetters.length;
   while (i < 5) {
     rowHTML += `
-      <div class="display-box"></div>
+      <div class="display-box js-box-${totalGuesses + 1}-${i}"></div>
     `;
     i++;
   }
 
   row.innerHTML = rowHTML;
 }
-let answer = getCorrectAnswer();
-console.log(answer);
 
-loadKeys();
+// The user wins the game if the guessed letters spell out the answer
+function submitAnswer() {
+  // Only submit the answer when 5 letters are guessed
+  if (inputLetters.length === 5) {
+    totalGuesses++;
+
+    for (let i = 0; i < inputLetters.length; i++) {
+      const currentBox = document.querySelector(`.js-box-${totalGuesses}-${i + 1}`);
+
+      if (inputLetters[i] === answer.charAt(i).toUpperCase()) {
+        currentBox.classList.add("correct-box");
+      }
+      else if (answer.includes(inputLetters[i].toLowerCase())) {
+        currentBox.classList.add("hint-box");
+      }
+    }
+
+    inputLetters = [];
+  }
+}

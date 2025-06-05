@@ -1,5 +1,5 @@
 body {
-  font-family: Merriweather;
+  font-family: Merriweather, Arial;
   background-color: rgb(212, 212, 192);
   text-align: center;
 }
@@ -7,7 +7,6 @@ body {
 .logo-container {
   width: 100px;
   height: 100px;
-  margin-bottom: 50px;
   margin: auto;
   margin-top: 200px;
   margin-bottom: 50px;
