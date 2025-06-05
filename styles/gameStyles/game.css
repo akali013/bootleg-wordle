@@ -1,3 +1,4 @@
+
 .display-container {
   display: grid;
   grid-template-columns: 63px 63px 63px 63px 63px;
@@ -45,4 +46,12 @@
 .enter-key, .del-key {
   font-size: 12px;
   padding: 0 10px;
+}
+
+.correct-box {
+  background-color: lightgreen;
+}
+
+.hint-box {
+  background-color: rgb(179, 179, 7);
 }
