@@ -81,7 +81,7 @@ function loadKeys() {
   let topRowHTML = "";
   topRowKeys.forEach((key) => {
     topRowHTML += `
-      <div class="key js-key">
+      <div class="key js-key js-key-${key}">
         ${key}
       </div>
     `;
@@ -91,7 +91,7 @@ function loadKeys() {
   let middleRowHTML = "";
   middleRowKeys.forEach((key) => {
     middleRowHTML += `
-      <div class="key js-key">
+      <div class="key js-key js-key-${key}">
         ${key}
       </div>
     `;
@@ -118,7 +118,7 @@ function loadKeys() {
     }
     else {
       bottomRowHTML += `
-        <div class="key js-key">
+        <div class="key js-key js-key-${key}">
           ${key}
         </div>
       `;
@@ -196,8 +196,21 @@ function submitAnswer() {
       else if (answer.includes(inputLetters[i].toLowerCase())) {
         currentBox.classList.add("hint-box");
       }
+      else {
+        invalidateLetter(inputLetters[i], i);
+      }
     }
 
     inputLetters = [];
   }
+}
+
+// Assign a darker box to the wrong letters 
+// in the answer grid and keyboard
+function invalidateLetter(letter, index) {
+  const gridBox = document.querySelector(`.js-box-${totalGuesses}-${index + 1}`);
+  const keyElement = document.querySelector(`.js-key-${letter}`);
+
+  gridBox.classList.add("incorrect-box");
+  keyElement.classList.add("incorrect-box");
 }
