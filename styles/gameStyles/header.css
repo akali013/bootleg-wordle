@@ -39,24 +39,39 @@
 .lightbulb-icon-container,
 .barchart-icon-container,
 .help-icon-container,
-.settings-icon-container {
-  width: 30px;
-  margin: 0 10px;
+.settings-icon-container,
+.hamburger-menu-icon-container {
+  height: 100%;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.lightbulb-icon-container:hover,
+.barchart-icon-container:hover,
+.help-icon-container:hover,
+.settings-icon-container:hover,
+.hamburger-menu-icon-container:hover {
+  background-color: rgb(85, 85, 85);
 }
 
 .lightbulb-icon,
 .barchart-icon,
 .help-icon,
-.settings-icon {
-  width: 100%;
+.settings-icon,
+.hamburger-menu-icon {
+  width: 35px;
 }
 
 .subscribe-button {
   background-color: transparent;
   border: 1px solid white;
   color: white;
-  width: 150px;
-  padding: 10px;
+  width: 170px;
+  padding: 8px;
   border-radius: 30px;
   margin-left: 10px;
+  font-size: 16px;
+  cursor: pointer;
 }

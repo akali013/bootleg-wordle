@@ -8,7 +8,7 @@ body {
   width: 100px;
   height: 100px;
   margin: auto;
-  margin-top: 200px;
+  margin-top: 150px;
   margin-bottom: 50px;
 }
 
@@ -26,7 +26,7 @@ body {
 
 .subtitle-container {
   width: 400px;
-  font-size: 36px;
+  font-size: 28px;
   margin: auto;
   margin-bottom: 25px;
 }
@@ -36,31 +36,37 @@ body {
 }
 
 .subscribe-button, .login-button {
-  width: 150px;
+  width: 180px;
   background-color: transparent;
   border: 1px solid black;
-  padding: 10px 0;
+  padding: 16px 0;
   margin: 0 7px;
-  border-radius: 20px;
+  border-radius: 30px;
+  font-size: 16px;
   cursor: pointer;
 }
 
 .play-button {
-  width: 150px;
+  width: 180px;
   background-color: black;
   color: white;
   border: none;
-  padding: 11px 0;
+  padding: 17px 0;
   margin: 0 7px;
-  border-radius: 20px;
+  border-radius: 30px;
+  font-size: 16px;
   cursor: pointer;
 }
 
 .data-container {
   font-family: Arial;
-  font-size: 15px;
+  font-size: 16px;
+}
+
+.edition, .author {
+  font-size: 14px;
 }
 
 .date {
-  font-weight: 700;
+  font-weight: 600;
 }

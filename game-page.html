@@ -5,6 +5,12 @@
     <link rel="stylesheet" href="styles/gameStyles/general.css">
     <link rel="stylesheet" href="styles/gameStyles/header.css">
     <link rel="stylesheet" href="styles/gameStyles/game.css">
+    <link rel="stylesheet" href="styles/gameStyles//instructions.css">
+
+    <!-- Merriweather font -->    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
   </head>
 
   <body>
@@ -37,6 +43,66 @@
         <button class="subscribe-button">
           Subscribe to Games
         </button>
+      </div>
+    </div>
+
+    <div class="instructions-pop-up">
+      <div class="close-container js-close">
+        <img class="close-icon" src="icons/close.svg">
+      </div>
+
+      <div class="title">
+        How To Play
+      </div>
+
+      <div class="subtitle">
+        Guess the Wordle in 6 tries.
+      </div>
+
+      <ul class="notes-list">
+        <li>Each guess must be a valid 5-letter word.</li>
+        <li>The color of the tiles will changes to show how close your guess was to the word.</li>
+      </ul>
+
+      <div class="examples-container">
+        Examples
+
+        <div class="example">
+          <img src="images/example1.png" class="example-image">
+          <strong>W</strong> is in the word and in the correct spot.
+        </div>
+
+        <div class="example">
+          <img src="images/example2.png" class="example-image">
+          <strong>I</strong> is in the word but in the wrong spot.
+        </div>
+
+        <div class="example">
+          <img src="images/example3.png" class="example-image">
+          <strong>U</strong> is not in the word in any spot.
+        </div>
+      </div>
+
+      <hr class="line">
+
+      <div class="login-prompt-container">
+        <div class="stats-icon-container">
+          <div class="checkmark-container">
+            <img class="checkmark" src="icons/checkmark.svg">
+          </div>
+
+          <img src="icons/barchart.svg" class="stats-image">
+        </div>
+
+        <div class="login-prompt">
+          <a>Log in or create a free NYT account</a> to link your stats.
+        </div>
+      </div>
+
+      <hr class="line">
+
+      <div class="reminder">
+        A new puzzle is released daily at midnight. If you haven't already, you can <a>sign up</a> for our daily reminder email.
       </div>
     </div>
 
