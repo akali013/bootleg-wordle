@@ -49,6 +49,11 @@ function loadGamePage() {
 
   answer = getCorrectAnswer();
   console.log(answer);
+
+  // Make the instructions pop-up disappear when the close icon is clicked
+  document.querySelector(".js-close").addEventListener("click", () => {
+    document.querySelector(".instructions-pop-up").remove();
+  });
 }
 
 // Load the 6x5 answer grid
