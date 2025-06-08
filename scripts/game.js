@@ -206,6 +206,17 @@ function submitAnswer() {
       }
     }
 
+    // If there are 5 green boxes in the current row, the answer was guessed
+    if (document.querySelectorAll(`.js-attempt-${totalGuesses} .correct-box`).length === 5) {
+      endGame();
+    }
+    else if (totalGuesses === 6) {
+      // Make totalGuesses outside of the range 1-6
+      // to show the answer
+      totalGuesses++;
+      endGame();
+    }
+
     inputLetters = [];
   }
 }
@@ -218,4 +229,46 @@ function invalidateLetter(letter, index) {
 
   gridBox.classList.add("incorrect-box");
   keyElement.classList.add("incorrect-box");
+}
+
+// Shows a pop-up with a message
+// based on how many guesses the player took
+// by the end of the game.
+function endGame() {
+  let winMessage = "";
+  switch (totalGuesses) {
+    case 1:
+      winMessage = "Genius";
+      break;
+    case 2:
+      winMessage = "Magnificient";
+      break;
+    case 3:
+      winMessage = "Impressive";
+      break;
+    case 4:
+      winMessage = "Splendid";
+      break;
+    case 5:
+      winMessage = "Great";
+      break;
+    case 6:
+      winMessage = "Phew";
+      break;
+    default:
+      winMessage = answer;      // Show the answer if the player loses
+  }
+
+  const winMessageElement = document.querySelector(".js-win-message");
+
+  winMessageElement.innerHTML = `
+    <div class="win-message">
+      ${winMessage}
+    </div>
+  `;
+
+  // Hide the message after 10 seconds (10k ms)
+  setTimeout(() => {
+    winMessageElement.remove();
+  }, 10000);
 }

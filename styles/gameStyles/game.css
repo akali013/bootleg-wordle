@@ -58,3 +58,19 @@
 .incorrect-box {
   background-color: rgb(34, 34, 34);
 }
+
+.win-message-container {
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+}
+
+.win-message {
+  background-color: white;
+  padding: 7px;
+  border-radius: 3px;
+}
