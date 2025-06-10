@@ -46,6 +46,7 @@ loadGamePage();
 function loadGamePage() {
   createAnswerGrid();
   loadKeys();
+  addKeyBinds();
 
   setAnswer();
   console.log(answer);
@@ -154,26 +155,46 @@ function loadKeys() {
   document.querySelectorAll(".js-key").forEach((keyElement) => {
     keyElement.addEventListener("click", () => {
       const letter = keyElement.innerText;
-
-      // Remove the last guessed letter if delete was clicked
-      if (letter === "Del") {
-        inputLetters.pop();
-        renderAnswerRow();
-      }
-      else if (letter === "ENTER") {
-        submitAnswer();
-      }
-      else {
-        // Ensure inputLetters never goes beyond 5 letters
-        if (inputLetters.length < 5) {
-          inputLetters.push(letter);
-          renderAnswerRow();
-        }
-      }
-
-      console.log(`inputLetters: ${inputLetters}`);
+      registerInput(letter);
     });
   });
+}
+
+// Allow the user to play with their keyboard 
+function addKeyBinds() {
+  document.body.addEventListener("keydown", (event) => {
+    let letter = event.key.toUpperCase();
+
+    if (letter === "BACKSPACE") {
+      letter = "Del";
+    }
+    
+    // Filter out unneeded keys like tab or equals
+    if (topRowKeys.includes(letter) || middleRowKeys.includes(letter) || bottomRowKeys.includes(letter)) {
+      registerInput(letter);
+    }
+  });
+}
+
+// Checks whether to add or remove a letter based on the given input
+function registerInput(letter) {
+  // Remove the last guessed letter if delete was clicked
+  if (letter === "Del") {
+    inputLetters.pop();
+    renderAnswerRow();
+  }
+  else if (letter === "ENTER") {
+    submitAnswer();
+  }
+  else {
+    // Ensure inputLetters never goes beyond 5 letters
+    if (inputLetters.length < 5) {
+      inputLetters.push(letter);
+      renderAnswerRow();
+    }
+  }
+
+  console.log(`inputLetters: ${inputLetters}`);
 }
 
 // Updates a specific row of the answer grid
