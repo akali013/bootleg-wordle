@@ -74,3 +74,32 @@
   padding: 7px;
   border-radius: 3px;
 }
+
+.play-again-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.play-again-button {
+  padding: 15px 25px;
+  border-radius: 10px;
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Helvetica, Arial;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.play-again-button:hover {
+  background-color: white;
+  color: black;
+}
+
+.play-again-button:active {
+  background-color: transparent;
+  color: white;
+}
