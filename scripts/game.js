@@ -47,13 +47,29 @@ function loadGamePage() {
   createAnswerGrid();
   loadKeys();
 
-  answer = getCorrectAnswer();
+  setAnswer();
   console.log(answer);
+
+  loadAnswers();
 
   // Make the instructions pop-up disappear when the close icon is clicked
   document.querySelector(".js-close").addEventListener("click", () => {
     document.querySelector(".instructions-pop-up").remove();
   });
+}
+
+// Generates a new answer if no guesses are saved in localStorage;
+// otherwise, keep the answer
+function setAnswer() {
+  let currentData = JSON.parse(localStorage.getItem("guess-1"));
+  answer = getCorrectAnswer();
+
+  if (currentData) {
+    answer = JSON.parse(localStorage.getItem("answer"));
+  }
+  else {
+    localStorage.setItem("answer", JSON.stringify(answer));
+  }
 }
 
 // Load the 6x5 answer grid
@@ -191,6 +207,7 @@ function submitAnswer() {
   // Only submit the answer when 5 letters are guessed
   if (inputLetters.length === 5) {
     totalGuesses++;
+    saveGuessToStorage();
 
     for (let i = 0; i < inputLetters.length; i++) {
       const currentBox = document.querySelector(`.js-box-${totalGuesses}-${i + 1}`);
@@ -267,8 +284,58 @@ function endGame() {
     </div>
   `;
 
+  // Show the play again button when the game ends
+  // and restart the game with a new answer when it's clicked
+  document.querySelector(".js-play-again").innerHTML = `
+    <button class="play-again-button js-play-again-button">Play again?</button>
+  `;
+
+  document.querySelector(".js-play-again-button").addEventListener("click", () => {
+    localStorage.clear();
+    location.reload();  // Refresh the page
+  });
+
   // Hide the message after 10 seconds (10k ms)
   setTimeout(() => {
     winMessageElement.remove();
   }, 10000);
+}
+
+// Save the current row of guessed letters to storage
+function saveGuessToStorage() {
+  switch (totalGuesses) {
+    case 1:
+      localStorage.setItem("guess-1", JSON.stringify(inputLetters));
+      break;
+    case 2:
+      localStorage.setItem("guess-2", JSON.stringify(inputLetters));
+      break;
+    case 3:
+      localStorage.setItem("guess-3", JSON.stringify(inputLetters));
+      break;
+    case 4:
+      localStorage.setItem("guess-4", JSON.stringify(inputLetters));
+      break;
+    case 5:
+      localStorage.setItem("guess-5", JSON.stringify(inputLetters));
+      break;
+    case 6:
+      localStorage.setItem("guess-6", JSON.stringify(inputLetters));
+  }
+}
+
+// Load each row of guesses from localStorage.
+function loadAnswers() {
+  let currentData = JSON.parse(localStorage.getItem("guess-1"));
+  let i = 1;
+
+  // Keep loading data if there is any
+  while(currentData) {
+    inputLetters = currentData;
+    renderAnswerRow();
+    submitAnswer();
+
+    i++;
+    currentData = JSON.parse(localStorage.getItem(`guess-${i}`));
+  }
 }
